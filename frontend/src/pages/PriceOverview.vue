@@ -61,6 +61,7 @@ export default {
     min-height: calc(100vh - 4.5em);
     height: calc(100% - 4.5em);
     box-sizing: border-box;
+    white-space: nowrap; /* 確保文字不會換行 */
 }
 .prices{
     display: flex;
@@ -74,5 +75,14 @@ export default {
 .subtitle{
     font-weight: normal;
     margin-top: .5em;
+}
+@media (max-width: 768px) {
+    .wrapper{
+        padding: 1em 1em;
+        background: #f3f3f3;
+        min-height: calc(100vh - 4.5em);
+        height: calc(100% - 4.5em);
+        box-sizing: border-box;
+    }
 }
 </style>

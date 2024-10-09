@@ -97,6 +97,11 @@ export default {
     margin-top: 2em;
 }
 
+.table-scroll {
+    overflow-x: auto; /* 允許橫向滾動 */
+    width: 100%;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -107,5 +112,11 @@ td {
     border: 1px solid #ccc;
     padding: 0.5em;
     text-align: center;
+}
+
+@media (max-width: 600px) {
+    table {
+        min-width: 600px; /* 確保表格寬度超過容器寬度來觸發滾動 */
+    }
 }
 </style>

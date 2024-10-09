@@ -83,6 +83,7 @@ export default {
     height: calc(100% - 4.5em);
     box-sizing: border-box;
     width: 100%;
+    white-space: nowrap; /* 確保文字不會換行 */
 }
 
 .content {
@@ -114,5 +115,17 @@ export default {
     flex: 1 1 50%;
     box-sizing: border-box;
     padding: 1em;
+}
+
+@media (max-width: 860px) {
+    .selects {
+        padding: 1em 1em;
+    }
+    .wrapper {
+        padding: 1em 1em; /* 改過的 */
+    }
+    .content {
+        padding: 0em; /* 改過的 */
+    }
 }
 </style>
