@@ -74,12 +74,17 @@ table {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
+    white-space: nowrap; /* 確保文字不會換行 */
     /* text-align: center; */
+}
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* 讓表格在寬度不足時可以橫向捲動 */
 }
 th, td {
     border: 1px solid #ddd;
     text-align: center;
-    padding: .5em 1em;
+    padding: 0.5rem;
 }
 th{
     background-color: #355f81;
@@ -94,5 +99,23 @@ h2{
     background-color: white;
     border-radius: 1em;
     padding: 2em;
+    overflow-x: auto; /* 手機上允許橫向捲動 */
+    width: 100%;
+}
+/* 手機響應式樣式 */
+@media screen and (max-width: 768px) {
+    th, td {
+        padding: 0.3rem;
+        font-size: 0.9rem; /* 調整字體大小以適應手機 */
+    }
+
+    .category-price-wrapper h2 {
+        font-size: 1.5rem; /* 調整標題大小 */
+    }
+
+    table {
+        width: 100%;
+        font-size: 0.9rem;
+    }
 }
 </style>
