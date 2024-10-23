@@ -90,4 +90,11 @@ export default {
     cursor: pointer;
     color: #888;
 }
+
+@media (max-width: 768px) {
+    .news-dialog {
+        padding: 0;
+        word-wrap: break-word;
+    }
+}
 </style>

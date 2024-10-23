@@ -97,6 +97,10 @@ export default {
 </script>
 
 <style scoped>
+.chart-scroll-container {
+    overflow-x: auto; /* 允許橫向滾動 */
+    width: 100%; /* 設置容器寬度 */
+}
 .chart-container {
     position: relative;
     margin: auto;
