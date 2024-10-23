@@ -355,13 +355,6 @@ async def login_for_access_token(
     """
     # 驗證使用者的帳號和密碼
     user = check_user_password_is_correct(db_session, form_data.username, form_data.password)
-    
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
 
     # 創建訪問令牌，30分鐘有效期
     access_token = create_access_token(
@@ -602,8 +595,8 @@ def toggle_article_upvote(article_id, user_id, db_session):
         return "Article upvoted"
 
 
-def news_exists(id2, db: Session):
-    return db.query(NewsArticle).filter_by(id=id2).first() is not None
+def news_exists(article_id, db: Session):
+    return db.query(NewsArticle).filter_by(id=article_id).first() is not None
 
 
 @app.get("/api/v1/prices/necessities-price")
