@@ -20,8 +20,12 @@ from sqlalchemy import (Column, ForeignKey, Integer, String, Table, Text,
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 
-Base = declarative_base()
+SERCET_KEY = '1892dhianiandowqd0n'
+TOKEN_EXPIRE_TIME = 15
+HASHED_METHOD = 'HS256'
+TOKEN_URL = '/api/v1/users/login'
 
+Base = declarative_base()
 
 user_news_association_table = Table(
     "user_news_upvotes",
@@ -31,9 +35,6 @@ user_news_association_table = Table(
         "news_articles_id", Integer, ForeignKey("news_articles.id"), primary_key=True
     ),
 )
-
-# from pydantic import BaseModel
-
 
 class User(Base):
     __tablename__ = "users"
@@ -88,39 +89,6 @@ app.add_middleware(
 import os
 from openai import OpenAI
 
-
-# def generate_summary(content):
-#     m = [
-#         {
-#             "role": "system",
-#             "content": "你是一個新聞摘要生成機器人，請統整新聞中提及的影響及主要原因 (影響、原因各50個字，請以json格式回答 {'影響': '...', '原因': '...'})",
-#         },
-#         {"role": "user", "content": f"{content}"},
-#     ]
-#
-#     completion = OpenAI(api_key="xxx").chat.completions.create(
-#         model="gpt-3.5-turbo",
-#         messages=m,
-#     )
-#     return completion.choices[0].message.content
-
-#
-# def extract_search_keywords(content):
-#     m = [
-#         {
-#             "role": "system",
-#             "content": "你是一個關鍵字提取機器人，用戶將會輸入一段文字，表示其希望看見的新聞內容，請提取出用戶希望看見的關鍵字，請截取最重要的關鍵字即可，避免出現「新聞」、「資訊」等混淆搜尋引擎的字詞。(僅須回答關鍵字，若有多個關鍵字，請以空格分隔)",
-#         },
-#         {"role": "user", "content": f"{content}"},
-#     ]
-#
-#     completion = OpenAI(api_key="xxx").chat.completions.create(
-#         model="gpt-3.5-turbo",
-#         messages=m,
-#     )
-#     return completion.choices[0].message.content
-
-
 from urllib.parse import quote
 import requests
 from bs4 import BeautifulSoup
@@ -153,7 +121,6 @@ def fetch_news_articles(search_keyword, fetch_multiple_pages=False):
     :return: 包含新聞資料的列表
     """
     all_news_articles = []
-    # 獲取多頁面的新聞資料，並不是實際上獲取所有新聞資料
     if fetch_multiple_pages:
         page_results = []
         for page_num in range(1, 10):
@@ -165,7 +132,6 @@ def fetch_news_articles(search_keyword, fetch_multiple_pages=False):
             }
             response = requests.get("https://udn.com/api/more", params=request_params)
             page_results.append(response.json()["lists"])
-
         for page_data in page_results:
             all_news_articles.extend(page_data)
     else:
@@ -177,7 +143,6 @@ def fetch_news_articles(search_keyword, fetch_multiple_pages=False):
         }
         response = requests.get("https://udn.com/api/more", params=request_params)
         all_news_articles = response.json()["lists"]
-
     return all_news_articles
 
 def process_and_store_relevant_news(fetch_multiple_pages=False):
@@ -188,10 +153,8 @@ def process_and_store_relevant_news(fetch_multiple_pages=False):
     :return:
     """
     news_articles = fetch_news_articles("價格", fetch_multiple_pages=fetch_multiple_pages)
-    
     for article in news_articles:
         article_title = article["title"]
-        
         relevance_assessment_prompt = [
             {
                 "role": "system",
@@ -202,22 +165,18 @@ def process_and_store_relevant_news(fetch_multiple_pages=False):
             },
             {"role": "user", "content": f"{article_title}"},
         ]
-        
         ai_response = OpenAI(api_key="xxx").chat.completions.create(
             model="gpt-3.5-turbo",
             messages=relevance_assessment_prompt,
         )
         relevance_rating = ai_response.choices[0].message.content
-        
         if relevance_rating == "high":
             article_response = requests.get(article["titleLink"])
             article_soup = BeautifulSoup(article_response.text, "html.parser")
             
-            # 提取文章標題與發布時間
             article_title = article_soup.find("h1", class_="article-content__title").text
             publication_time = article_soup.find("time", class_="article-content__time").text
             
-            # 提取文章內容
             content_section = article_soup.find("section", class_="article-content__editor")
             article_paragraphs = [
                 paragraph.text
@@ -252,7 +211,6 @@ def process_and_store_relevant_news(fetch_multiple_pages=False):
             detailed_article["summary"] = summary_result["影響"]
             detailed_article["reason"] = summary_result["原因"]
             
-            # 將處理過的新聞存入資料庫
             add_news_article_to_db(detailed_article)
 
 
@@ -263,26 +221,20 @@ def initialize_news_scheduler():
     """
     db_session = SessionLocal()
     
-    # 如果資料庫中沒有新聞，則進行初始新聞抓取
     if db_session.query(NewsArticle).count() == 0:
-        # 可以改用簡單工廠模式來處理不同類型的新聞抓取
         process_and_store_relevant_news()
-    
     db_session.close()
     
     # 設置一個每隔100分鐘執行一次的定時任務
     background_scheduler.add_job(process_and_store_relevant_news, "interval", minutes=100)
     background_scheduler.start()
 
-
 @app.on_event("shutdown")
 def shutdown_scheduler():
     background_scheduler.shutdown()
 
-
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/users/login")
-
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl=TOKEN_URL)
 
 def session_opener():
     session = Session(bind=engine)
@@ -291,11 +243,8 @@ def session_opener():
     finally:
         session.close()
 
-
-
 def verify(p1, p2):
     return pwd_context.verify(p1, p2)
-
 
 def check_user_password_is_correct(db_session, username, input_password):
     """
@@ -325,25 +274,21 @@ def authenticate_user_token(
     :param db_session: 資料庫的 session
     :return: 對應於 token 的使用者，如果找不到則返回 None
     """
-    secret_key = '1892dhianiandowqd0n'
-    token_payload = jwt.decode(token, secret_key, algorithms=["HS256"])
+    token_payload = jwt.decode(token, SERCET_KEY, algorithms=[HASHED_METHOD])
     
     # 根據 token payload 中的 "sub" 字段（通常是 username）查找使用者
     return db_session.query(User).filter(User.username == token_payload.get("sub")).first()
 
-
 def create_access_token(data, expires_delta=None):
-    """create access token"""
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(minutes=15)
+        expire = datetime.utcnow() + timedelta(minutes=TOKEN_EXPIRE_TIME)
     to_encode.update({"exp": expire})
     print(to_encode)
     encoded_jwt = jwt.encode(to_encode, '1892dhianiandowqd0n', algorithm="HS256")
     return encoded_jwt
-
 
 @app.post("/api/v1/users/login")
 async def login_for_access_token(
@@ -372,27 +317,19 @@ def create_user(user_data: UserAuthSchema , db_session: Session = Depends(sessio
     """
     註冊新使用者
     """
-    # 將密碼進行哈希處理
     hashed_password = pwd_context.hash(user_data.password)
-    
-    # 創建新的使用者實體
     new_user = User(username=user_data.username, hashed_password=hashed_password)
     
-    # 將新使用者加入資料庫
     db_session.add(new_user)
     db_session.commit()
     db_session.refresh(new_user)
-    
     return new_user
-
 
 @app.get("/api/v1/users/me")
 def read_users_me(user=Depends(authenticate_user_token)):
     return {"username": user.username}
 
-
 _id_counter = itertools.count(start=1000000)
-
 
 def get_article_upvote_details(article_id, user_id, db_session):
     """
@@ -403,14 +340,11 @@ def get_article_upvote_details(article_id, user_id, db_session):
     :param db_session: 資料庫的 session
     :return: (點贊總數, 當前使用者是否已點贊)
     """
-    # 計算該文章的點贊總數
     total_upvotes = (
         db_session.query(user_news_association_table)
         .filter_by(news_articles_id=article_id)
         .count()
     )
-    
-    # 檢查當前使用者是否已點贊
     has_voted = False
     if user_id:
         has_voted = (
@@ -419,7 +353,7 @@ def get_article_upvote_details(article_id, user_id, db_session):
             .first()
             is not None
         )
-    
+    # :return: (點贊總數, 當前使用者是否已點贊)
     return total_upvotes, has_voted
 
 
@@ -431,7 +365,7 @@ def read_news(db_session=Depends(session_opener)):
     :param db_session: 資料庫的 session
     :return: 包含新聞文章及其點贊詳情的列表
     """
-    # 獲取所有新聞，按時間倒序排列
+    # 將文章按時間倒序排列
     news_articles = db_session.query(NewsArticle).order_by(NewsArticle.time.desc()).all()
     
     # 構建返回的結果集，包含每篇文章的點贊數和是否已點贊
@@ -441,9 +375,7 @@ def read_news(db_session=Depends(session_opener)):
         result.append(
             {**article.__dict__, "upvotes": upvotes, "is_upvoted": is_upvoted}
         )
-    
     return result
-
 
 @app.get(
     "/api/v1/news/user_news"
@@ -453,11 +385,11 @@ def read_user_news(
     user=Depends(authenticate_user_token)
 ):
     """
-    Retrieve news articles for a user, including upvote details.
+    為使用者取得新聞文章，包含點讚詳情。
 
-    :param db_session: Database session dependency
-    :param user: Authenticated user from token
-    :return: List of news articles with upvote details
+    :param db_session: 資料庫會話 session 依賴
+    :param user: 從 token 獲得的已驗證使用者
+    :return: 包含點讚詳情的新聞文章列表
     """
     news_articles = db_session.query(NewsArticle).order_by(NewsArticle.time.desc()).all()
     articles_with_upvotes = []
@@ -488,25 +420,22 @@ async def search_news(request: PromptRequest):
         },
         {"role": "user", "content": f"{user_prompt}"},
     ]
-
     ai_completion = OpenAI(api_key="xxx").chat.completions.create(
         model="gpt-3.5-turbo",
         messages=prompt_messages,
     )
     extracted_keywords = ai_completion.choices[0].message.content
     
-    # Fetch news articles based on extracted keywords
+    # 根據提取的關鍵字獲取新聞文章
     relevant_news_items = fetch_news_articles(extracted_keywords, is_initial=False)
     for news_item in relevant_news_items:
         try:
             news_response = requests.get(news_item["titleLink"])
             news_soup = BeautifulSoup(news_response.text, "html.parser")
             
-            # Extract title and time
             news_title = news_soup.find("h1", class_="article-content__title").text
             news_time = news_soup.find("time", class_="article-content__time").text
             
-            # Locate the section containing the article content
             news_content_section = news_soup.find("section", class_="article-content__editor")
             content_paragraphs = [
                 paragraph.text
@@ -514,7 +443,6 @@ async def search_news(request: PromptRequest):
                 if paragraph.text.strip() != "" and "▪" not in paragraph.text
             ]
             
-            # Create detailed news dictionary
             detailed_news_info = {
                 "url": news_item["titleLink"],
                 "title": news_title,
@@ -534,41 +462,53 @@ class NewsSumaryRequestSchema(BaseModel):
 
 @app.post("/api/v1/news/news_summary")
 async def news_summary(
-        payload: NewsSumaryRequestSchema, u=Depends(authenticate_user_token)
+    news_summary_request: NewsSumaryRequestSchema, user=Depends(authenticate_user_token)
 ):
-    response = {}
-    m = [
+    """
+    這個 API 端點接收新聞內容，並生成一個包含新聞影響和原因的摘要。
+    
+    :param news_summary_request: 包含新聞內容的請求數據。
+    :param user: 經由 `authenticate_user_token` 認證的使用者。
+    :return: JSON 格式的摘要結果，包括 `summary` (影響) 和 `reason` (原因)。
+    """
+    summary_response = {}
+    prompt_messages = [
         {
             "role": "system",
             "content": "你是一個新聞摘要生成機器人，請統整新聞中提及的影響及主要原因 (影響、原因各50個字，請以json格式回答 {'影響': '...', '原因': '...'})",
         },
-        {"role": "user", "content": f"{payload.content}"},
+        {"role": "user", "content": f"{news_summary_request.content}"},
     ]
-
-    completion = OpenAI(api_key="xxx").chat.completions.create(
+    completion_response = OpenAI(api_key="xxx").chat.completions.create(
         model="gpt-3.5-turbo",
-        messages=m,
+        messages=prompt_messages,
     )
-    result = completion.choices[0].message.content
-    if result:
-        result = json.loads(result)
-        response["summary"] = result["影響"]
-        response["reason"] = result["原因"]
-    return response
 
+    completion_content = completion_response.choices[0].message.content
+    if completion_content:
+        result_data = json.loads(completion_content)
+        summary_response["summary"] = result_data["影響"]
+        summary_response["reason"] = result_data["原因"]
+    return summary_response
 
 @app.post("/api/v1/news/{id}/upvote")
 def upvote_article(
-        article_id,
-        db_session=Depends(session_opener),
-        user=Depends(authenticate_user_token),
+    article_id,
+    db_session=Depends(session_opener),
+    user=Depends(authenticate_user_token),
 ):
     upvote_status_message = toggle_article_upvote(article_id, user.id, db_session)
     return {"message": upvote_status_message}
 
-
 def toggle_article_upvote(article_id, user_id, db_session):
-    # 檢查是否已存在用戶對該文章的 upvote
+    """
+    切換用戶對文章的 upvote 狀態：如果用戶已 upvote 該文章則移除 upvote ，否則添加 upvote。
+    
+    :param article_id: 欲 upvote 或取消 upvote 的文章 ID。
+    :param user_id: 執行 upvote 操作的用戶 ID。
+    :param db_session: 資料庫會話，用來執行查詢和操作。
+    :return: "Upvote removed" 或 "Article upvoted" 字串，表示操作結果。
+    """
     existing_upvote_record = db_session.execute(
         select(user_news_association_table).where(
             user_news_association_table.c.news_articles_id == article_id,
@@ -577,7 +517,6 @@ def toggle_article_upvote(article_id, user_id, db_session):
     ).scalar()
 
     if existing_upvote_record:
-        # 如果已存在，則移除 upvote
         delete_upvote = delete(user_news_association_table).where(
             user_news_association_table.c.news_articles_id == article_id,
             user_news_association_table.c.user_id == user_id,
@@ -586,7 +525,6 @@ def toggle_article_upvote(article_id, user_id, db_session):
         db_session.commit()
         return "Upvote removed"
     else:
-        # 如果不存在，則添加 upvote
         add_upvote = insert(user_news_association_table).values(
             news_articles_id=article_id, user_id=user_id
         )
@@ -594,10 +532,8 @@ def toggle_article_upvote(article_id, user_id, db_session):
         db_session.commit()
         return "Article upvoted"
 
-
 def news_exists(article_id, db: Session):
     return db.query(NewsArticle).filter_by(id=article_id).first() is not None
-
 
 @app.get("/api/v1/prices/necessities-price")
 def get_necessities_prices(
