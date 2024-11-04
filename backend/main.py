@@ -61,13 +61,9 @@ class NewsArticle(Base):
         "User", secondary=user_news_association_table, back_populates="upvoted_news"
     )
 
-
 engine = create_engine("sqlite:///news_database.db", echo=True)
-
 Base.metadata.create_all(engine)
-
 Session = sessionmaker(bind=engine)
-
 sentry_sdk.init(
     dsn="https://4001ffe917ccb261aa0e0c34026dc343@o4505702629834752.ingest.us.sentry.io/4507694792704000",
     traces_sample_rate=1.0,
@@ -77,7 +73,6 @@ sentry_sdk.init(
 app = FastAPI()
 background_scheduler = BackgroundScheduler()
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
 app.add_middleware(
     CORSMiddleware,  # noqa
     allow_origins=["http://localhost:8080"],
@@ -88,7 +83,6 @@ app.add_middleware(
 
 import os
 from openai import OpenAI
-
 from urllib.parse import quote
 import requests
 from bs4 import BeautifulSoup
