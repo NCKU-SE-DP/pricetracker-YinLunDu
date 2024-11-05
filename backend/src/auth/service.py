@@ -10,14 +10,14 @@ from passlib.context import CryptContext
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=Config.Auth.TOKEN_URL)
 
-def verify(p1, p2):
+def verify(plain_password, hashed_password):
     """
     驗證密碼是否正確。
-    :param p1: 待驗證的密碼（通常為使用者輸入的明文密碼）。
-    :param p2: 加密後的密碼（通常從數據庫中提取的哈希密碼）。
-    :return: 如果 `p1` 與 `p2` 相符，返回 True；否則返回 False。
+    :param plain_password: 待驗證的密碼（通常為使用者輸入的明文密碼）。
+    :param hashed_password: 加密後的密碼（通常從數據庫中提取的哈希密碼）。
+    :return: 如果 `plain_password` 與 `hashed_password` 相符，返回 True；否則返回 False。
     """
-    return pwd_context.verify(p1, p2)
+    return pwd_context.verify(plain_password, hashed_password)
 
 def check_user_password_is_correct(db_session, username, input_password):
     """
