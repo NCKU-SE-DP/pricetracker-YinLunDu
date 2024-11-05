@@ -32,7 +32,6 @@ def add_news_article_to_db(news_article_data):
 def fetch_news_articles(search_keyword, fetch_multiple_pages=False):
     """
     根據搜尋詞獲取新聞文章
-
     :param search_keyword: 用來搜尋新聞的關鍵字
     :param fetch_multiple_pages: 是否獲取多個頁面的新聞資料
     :return: 包含新聞資料的列表
@@ -65,7 +64,6 @@ def fetch_news_articles(search_keyword, fetch_multiple_pages=False):
 def process_and_store_relevant_news(fetch_multiple_pages=False):
     """
     獲取並處理相關的新聞資料，並將符合條件的新聞存入資料庫
-
     :param fetch_multiple_pages: 是否需要抓取多頁的新聞
     :return:
     """
@@ -133,7 +131,6 @@ def process_and_store_relevant_news(fetch_multiple_pages=False):
 def get_article_upvote_details(article_id, user_id, db_session):
     """
     獲取新聞文章的點贊詳情
-
     :param article_id: 文章的 ID
     :param user_id: 使用者的 ID (可選)
     :param db_session: 資料庫的 session
@@ -158,7 +155,6 @@ def get_article_upvote_details(article_id, user_id, db_session):
 def toggle_article_upvote(article_id, user_id, db_session):
     """
     切換用戶對文章的 upvote 狀態：如果用戶已 upvote 該文章則移除 upvote ，否則添加 upvote。
-    
     :param article_id: 欲 upvote 或取消 upvote 的文章 ID。
     :param user_id: 執行 upvote 操作的用戶 ID。
     :param db_session: 資料庫會話，用來執行查詢和操作。

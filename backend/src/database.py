@@ -20,6 +20,10 @@ Session = sessionmaker(bind=engine)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def session_opener():
+    """
+    創建並管理資料庫會話，確保在操作完成後自動關閉會話。
+    :yield: 生成一個資料庫會話 (Session) 供依賴注入使用。
+    """
     session = Session(bind=engine)
     try:
         yield session

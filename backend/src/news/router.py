@@ -22,7 +22,6 @@ def read_user_news(
 ):
     """
     為使用者取得新聞文章，包含點讚詳情。
-
     :param db_session: 資料庫會話 session 依賴
     :param user: 從 token 獲得的已驗證使用者
     :return: 包含點讚詳情的新聞文章列表
@@ -45,7 +44,6 @@ def read_user_news(
 def read_news(db_session=Depends(session_opener)):
     """
     獲取最新的新聞文章
-
     :param db_session: 資料庫的 session
     :return: 包含新聞文章及其點贊詳情的列表
     """
@@ -63,6 +61,11 @@ def read_news(db_session=Depends(session_opener)):
 
 @router.post("/search_news")
 async def search_news(request: PromptRequest):
+    """
+    這個 API 端點根據使用者輸入的新聞描述文字，提取關鍵字並檢索相關新聞，返回包含新聞詳細資訊的列表。
+    :param request: `PromptRequest` 類型的請求對象，包含使用者輸入的新聞描述文字 (prompt)。
+    :return: JSON 格式的新聞列表，每項新聞包括 `url`、`title`、`time`、`content` 和 `id`。
+    """
     user_prompt = request.prompt
     extracted_news_list = []
     prompt_messages = [
@@ -84,17 +87,14 @@ async def search_news(request: PromptRequest):
         try:
             news_response = requests.get(news_item["titleLink"])
             news_soup = BeautifulSoup(news_response.text, "html.parser")
-            
             news_title = news_soup.find("h1", class_="article-content__title").text
             news_time = news_soup.find("time", class_="article-content__time").text
-            
             news_content_section = news_soup.find("section", class_="article-content__editor")
             content_paragraphs = [
                 paragraph.text
                 for paragraph in news_content_section.find_all("p")
                 if paragraph.text.strip() != "" and "▪" not in paragraph.text
             ]
-            
             detailed_news_info = {
                 "url": news_item["titleLink"],
                 "title": news_title,
@@ -115,7 +115,6 @@ async def news_summary(
 ):
     """
     這個 API 端點接收新聞內容，並生成一個包含新聞影響和原因的摘要。
-    
     :param news_summary_request: 包含新聞內容的請求數據。
     :param user: 經由 `authenticate_user_token` 認證的使用者。
     :return: JSON 格式的摘要結果，包括 `summary` (影響) 和 `reason` (原因)。
@@ -146,5 +145,12 @@ def upvote_article(
     db_session=Depends(session_opener),
     user=Depends(authenticate_user_token),
 ):
+    """
+    這個 API 端點處理文章的點讚功能，並返回點讚操作的結果訊息。
+    :param article_id: 需要點讚或取消點讚的文章 ID。
+    :param db_session: 資料庫會話，用於執行資料庫操作，預設依賴於 `session_opener` 函數。
+    :param user: 經由 `authenticate_user_token` 認證的使用者。
+    :return: JSON 格式的點讚操作狀態訊息，例如 {"message": "Upvoted"} 或 {"message": "Upvote removed"}。
+    """
     upvote_status_message = toggle_article_upvote(article_id, user.id, db_session)
     return {"message": upvote_status_message}

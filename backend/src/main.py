@@ -30,6 +30,9 @@ app.add_middleware(
 def initialize_news_scheduler():
     """
     初始化新聞爬取排程
+    :param db_session: 用於與新聞資料庫交互的資料庫會話。
+    :param background_scheduler: 用於執行定時任務的排程器。
+    :return: 無返回值
     """
     db_session = SessionLocal()
     
@@ -43,6 +46,11 @@ def initialize_news_scheduler():
 
 @app.on_event("shutdown")
 def shutdown_scheduler():
+    """
+    關閉排程器
+    :param background_scheduler: 負責管理定時任務的排程器。
+    :return: 無返回值
+    """
     background_scheduler.shutdown()
 
 app.include_router(user_router, prefix=Config.Setting.FASTAPI_PREFIX)
