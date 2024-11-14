@@ -28,9 +28,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.10"
-          cache-dependency-path: |
-            backend/requirements.txt
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
@@ -47,10 +45,7 @@ jobs:
 
       - name: Run integration tests (with mock DB)
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          OPEN_AI_API_KEY: ${{ secrets.OPEN_AI_API_KEY }}
-          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
-          USER_ACCESS_TOKEN_SECRET_KEY: ${{ secrets.USER_ACCESS_TOKEN_SECRET_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           cd backend
           pytest tests/integration --cov=src --cov-report=xml --disable-warnings
