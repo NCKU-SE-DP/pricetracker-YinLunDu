@@ -10,7 +10,7 @@ class TestOpenAIClient(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         if RUN_REAL_API_TESTS:
-            self.client = OpenAIClient(api_key=Config.OpenAI.OPENAI_TOKEN)
+            self.client = OpenAIClient(api_key=os.getenv("openai"))
         else:
             self.client = OpenAIClient(api_key="fake_api_key")
     @unittest.skipIf(not RUN_REAL_API_TESTS, "模擬 API 呼叫，跳過真實測試")

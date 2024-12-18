@@ -14,5 +14,3 @@ class Config:
         TOKEN_EXPIRE_TIME = 30
     class News:
         NEWS_FETCH_INTERVAL_TIME = 100
-    class OpenAI:
-        OPENAI_TOKEN = ""
