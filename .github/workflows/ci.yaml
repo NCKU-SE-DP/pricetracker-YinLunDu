@@ -6,6 +6,7 @@ on:
       - 'main'
       - 'develop'
       - 'fix/integration-test'
+      - 'refactor/error_handling'
   pull_request:
     branches:
       - 'main'
@@ -40,14 +41,14 @@ jobs:
 
       - name: Run crawler tests
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          openai: ${{ secrets.OPENAI_API_KEY }}
         run: |
           cd backend
           pytest tests/llm_client --cov=src --cov-report=xml --disable-warnings
 
       - name: Run llm_clients tests
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          openai: ${{ secrets.OPENAI_API_KEY }}
         run: |
           cd backend
           pytest tests/llm_client --cov=src --cov-report=xml --disable-warnings
@@ -55,7 +56,7 @@ jobs:
       - name: Run integration tests (with mock DB)
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          OPEN_AI_API_KEY: ${{ secrets.OPEN_AI_API_KEY }}
+          openai: ${{ secrets.OPENAI_API_KEY }}
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
           USER_ACCESS_TOKEN_SECRET_KEY: ${{ secrets.USER_ACCESS_TOKEN_SECRET_KEY }}
         run: |
