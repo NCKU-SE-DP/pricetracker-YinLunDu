@@ -9,21 +9,23 @@ formatter = logging.Formatter(
     "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
 
-if not os.path.exists("logs"):
-    os.makedirs("logs")
+log_path = f"logs"
+
+if not os.path.exists(log_path):
+    os.makedirs(log_path)
 
 stream_handler = logging.StreamHandler()
 stream_handler.setLevel(logging.INFO)
 stream_handler.setFormatter(formatter)
 logger.addHandler(stream_handler)
 
-file_handler = logging.FileHandler(f"{os.getcwd()}/app.log")
+file_handler = logging.FileHandler(f"{log_path}/app.log")
 file_handler.setLevel(logging.DEBUG)
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
 rotating_file_handler = RotatingFileHandler(
-    f"{os.getcwd()}/app.log", maxBytes=5 * 1024 * 1024, backupCount=3
+    f"{log_path}/app_rotating.log", maxBytes=5 * 1024 * 1024, backupCount=3
 )
 rotating_file_handler.setLevel(logging.ERROR)
 rotating_file_handler.setFormatter(formatter)
