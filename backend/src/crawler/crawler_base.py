@@ -52,7 +52,7 @@ class NewsCrawlerBase(metaclass=abc.ABCMeta):
     news_website_news_child_urls: list[AnyHttpUrl | str]
 
     @abc.abstractmethod
-    def get_headline(
+    def get_headlines(
             self, search_term: str, page: int | tuple[int, int]
     ) -> list[Headline]:
         """
