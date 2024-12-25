@@ -2,6 +2,7 @@ import json
 import requests
 from fastapi import APIRouter, Depends
 from openai import OpenAI
+import pydantic
 from ..auth.service import authenticate_user_token
 from ..database import session_opener
 from ..logger import logger
@@ -14,7 +15,6 @@ from .service import (
     fetch_news_articles,
     toggle_article_upvote,
     process_news_item,
-    convert_news_to_dict,
     fetch_news_with_details
 )
 router = APIRouter(
@@ -59,7 +59,7 @@ async def search_news(request: PromptRequest):
     relevant_news_items = fetch_news_articles(extracted_keywords, is_initial=False)
     for news_item in relevant_news_items:
         try:
-            detailed_news_info = convert_news_to_dict(process_news_item(news_item))
+            detailed_news_info = process_news_item(news_item).model_dump()
             detailed_news_info["id"] = next(article_id_counter)
             extracted_news_list.append(detailed_news_info)
             logger.info(f"Search news success: {detailed_news_info['title']}")

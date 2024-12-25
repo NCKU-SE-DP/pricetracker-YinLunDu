@@ -38,14 +38,6 @@ def parse_summary_result():
 def process_news_item(news):
     return crawler.validate_and_parse(news.url)
 
-def convert_news_to_dict(news):
-    return {
-        "url": news.url,
-        "title": news.title,
-        "time": news.time,
-        "content": news.content,
-    }
-
 article_id_counter = itertools.count(start=1000000)
 def add_news_article_to_db(news_article_data):
     """
@@ -98,7 +90,7 @@ def fetch_news_articles(search_keyword: str, is_initial=False) -> list:
     if is_initial:
         return crawler.startup(search_keyword)
     else:
-        return crawler.get_headline(search_keyword, 1)
+        return crawler.get_headlines(search_keyword, 1)
 
 def process_and_store_relevant_news(fetch_multiple_pages=False):
     """
