@@ -4,4 +4,3 @@ __pycache__
 ./backend/logs
 ./backend/logs/app.log
 ./backend/logs/app_rotating.log
-./backend/news_database.db
