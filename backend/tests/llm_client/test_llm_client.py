@@ -13,6 +13,7 @@ class TestOpenAIClient(unittest.TestCase):
             self.client = OpenAIClient(api_key=os.getenv("openai"))
         else:
             self.client = OpenAIClient(api_key="fake_api_key")
+
     @unittest.skipIf(not RUN_REAL_API_TESTS, "模擬 API 呼叫，跳過真實測試")
     def test_evaluate_relevance_real(self):
         result = self.client.evaluate_relevance("食品價格上漲")
@@ -26,7 +27,9 @@ class TestOpenAIClient(unittest.TestCase):
     def test_extract_search_keywords_real(self):
         result = self.client.extract_search("這篇新聞提到食品價格的波動以及市場的供應鏈問題")
         self.assertGreater(len(result.split()), 0)
+
     @patch('src.llm_client.clients.OpenAIClient._generate_text')
+
     def test_evaluate_relevance(self, mock_generate):
         mock_generate.return_value = 'high'
         result = self.client.evaluate_relevance("食品價格上漲")
@@ -38,6 +41,7 @@ class TestOpenAIClient(unittest.TestCase):
             )
         )
     @patch('src.llm_client.clients.OpenAIClient._generate_text')
+
     def test_generate_summary(self, mock_generate):
         mock_generate.return_value = '{"影響": "影響描述", "原因": "原因描述"}'
         result = self.client.generate_summary("一篇新聞內容")
@@ -49,6 +53,7 @@ class TestOpenAIClient(unittest.TestCase):
             )
         )
     @patch('src.llm_client.clients.OpenAIClient._generate_text')
+
     def test_extract_search_keywords(self, mock_generate):
         mock_generate.return_value = '食品 價格'
         result = self.client.extract_search("一段希望看到的新聞文字")
