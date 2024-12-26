@@ -23,7 +23,7 @@ openai_client = OpenAIClient(api_key=os.getenv("openai"))
 anthropic_client = AnthropicClient(api_key=os.getenv("claude"))
 
 crawler = UDNCrawler()
-openai_client = OpenAIClient(_api_key=Config.OpenAI.OPENAI_TOKEN)
+openai_client = OpenAIClient(api_key=os.getenv("openai"))
 
 def parse_summary_result():
     response_data = {}
