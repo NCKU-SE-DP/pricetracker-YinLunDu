@@ -17,7 +17,7 @@ COPY . .
 EXPOSE 8000
 
 # 定義環境變量
-ENV MODULE_NAME="app.main"
+ENV MODULE_NAME="app.src.main"
 ENV VARIABLE_NAME="backend"
 
 # 使用 uvicorn 運行 fastapi 應用

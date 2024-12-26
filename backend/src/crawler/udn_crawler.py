@@ -21,8 +21,8 @@ Usage Example:
 UDNCrawler Methods:
     __init__(self, timeout: int = 5): Initializes the crawler with a default timeout for HTTP requests.
     startup(self, search_term: str) -> list[Headline]: Fetches news headlines for a given search term across multiple pages.
-    get_headline(self, search_term: str, page: int | tuple[int, int]) -> list[Headline]: Fetches news headlines for specified pages.
-    _fetch_news(self, page: int, search_term: str) -> list[Headline]: Helper method to fetch news headlines for a specific page.
+    get_headlines(self, search_term: str, page: int | tuple[int, int]) -> list[Headline]: Fetches news headlines for specified pages.
+    _fetch_headlines(self, page: int, search_term: str) -> list[Headline]: Helper method to fetch news headlines for a specific page.
     _create_search_params(self, page: int, search_term: str): Creates the parameters for the search request.
     _perform_request(self, params: dict): Performs the HTTP request to fetch news data.
     _parse_headlines(response): Parses the response to extract headlines.
@@ -57,9 +57,9 @@ class UDNCrawler(NewsCrawlerBase):
         :return: A list of Headline namedtuples containing the title and URL of news articles.
         :rtype: list[Headline]
         """
-        return self.get_headline(search_term, page=(1, 10))
+        return self.get_headlines(search_term, page=(1, 10))
 
-    def get_headline(
+    def get_headlines(
         self, search_term: str, page: int | tuple[int, int]
     ) -> list[Headline]:
 
@@ -75,11 +75,11 @@ class UDNCrawler(NewsCrawlerBase):
         page_range = range(*page) if isinstance(page, tuple) else [page]
         news_data = []
         for page in page_range:
-            news_data.extend(self._fetch_news(page, search_term))
+            news_data.extend(self._fetch_headlines(page, search_term))
 
         return news_data
 
-    def _fetch_news(self, page: int, search_term: str) -> list[Headline]:
+    def _fetch_headlines(self, page: int, search_term: str) -> list[Headline]:
         response = self._perform_request(self.news_website_url,
                                          self._create_search_params(page, search_term, "searchword"))
         return self._parse_headlines(response)

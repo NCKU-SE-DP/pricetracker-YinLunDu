@@ -9,7 +9,7 @@ class MockNewsCrawler(NewsCrawlerBase):
     news_website_url = "https://www.example.com"
     news_website_news_child_urls = ["https://news.example.com"]
 
-    def get_headline(self, search_term: str, page: int | tuple[int, int]):
+    def get_headlines(self, search_term: str, page: int | tuple[int, int]):
         return [Headline(title="Test Article", url="https://www.example.com/article")]
 
     def _parse(self, url: AnyHttpUrl | str):
@@ -49,7 +49,7 @@ class TestNewsCrawlerBase(unittest.TestCase):
             self.crawler.validate_and_parse(invalid_url)
 
     def test_get_headline(self):
-        headlines = self.crawler.get_headline(search_term="test", page=1)
+        headlines = self.crawler.get_headlines(search_term="test", page=1)
         self.assertEqual(len(headlines), 1)
         self.assertEqual(headlines[0].title, "Test Article")
         self.assertEqual(headlines[0].url, "https://www.example.com/article")

@@ -1,3 +1,6 @@
 .pytest_cache
 __pycache__
 .env
+./backend/logs
+./backend/logs/app.log
+./backend/logs/app_rotating.log
