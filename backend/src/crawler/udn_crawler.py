@@ -42,10 +42,10 @@ from .crawler_base import NewsCrawlerBase, Headline, News, NewsWithSummary
 from ..news.models import NewsArticle
 
 class UDNCrawler(NewsCrawlerBase):
+    NEWS_WEBSITE_URL = "https://udn.com/api/more"
     CHANNEL_ID = 2
-
+    
     def __init__(self, timeout: int = 5) -> None:
-        self.news_website_url = "https://udn.com/api/more"
         self.timeout = timeout
 
     def startup(self, search_term: str) -> list[Headline]:
@@ -81,7 +81,7 @@ class UDNCrawler(NewsCrawlerBase):
         return news_data
 
     def _fetch_headlines(self, page: int, search_term: str) -> list[Headline]:
-        response = self._perform_request(self.news_website_url,
+        response = self._perform_request(self.NEWS_WEBSITE_URL,
                                          self._create_search_params(page, search_term, "searchword"))
         return self._parse_headlines(response)
 
