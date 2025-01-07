@@ -1,0 +1,120 @@
+2024-12-26 19:24:28,088 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:24:28,088 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:24:28,904 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:24:28,904 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:24:29,513 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:24:29,513 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:24:29,844 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:24:29,844 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:24:30,189 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:24:30,189 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:24:30,482 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:24:30,482 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:25:31,939 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:25:31,939 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:25:32,442 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:25:32,442 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:25:32,975 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:25:32,975 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:25:33,262 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:25:33,262 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:25:33,567 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:25:33,567 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:25:33,848 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:25:33,848 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:28:45,197 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:28:45,197 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:28:45,715 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:28:45,715 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:28:46,200 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:28:46,200 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:28:46,461 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:28:46,461 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:28:46,728 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:28:46,728 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:28:46,999 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:28:46,999 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:30:21,525 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:30:21,525 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:30:22,043 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:30:22,043 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:30:22,596 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:30:22,596 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:30:22,862 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:30:22,862 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:30:23,144 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:30:23,160 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:30:23,439 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:30:23,439 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:31:50,579 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:31:50,579 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:31:51,172 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:31:51,172 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:31:51,481 - httpx - DEBUG - load_ssl_context verify=True cert=None trust_env=True http2=False
+2024-12-26 19:31:51,481 - httpx - DEBUG - load_verify_locations cafile='C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\certifi\\cacert.pem'
+2024-12-26 19:31:53,957 - tzlocal - DEBUG - Looking up time zone info from registry
+2024-12-26 19:31:54,085 - asyncio - DEBUG - Using proactor: IocpProactor
+2024-12-26 19:31:54,099 - root - INFO - Successfully fetched upvote count for article ID: 2
+2024-12-26 19:31:54,101 - root - INFO - Successfully fetched upvote count for article ID: 1
+2024-12-26 19:31:54,104 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): o4508489109209088.ingest.us.sentry.io:443
+2024-12-26 19:31:54,110 - httpx - INFO - HTTP Request: GET http://testserver/api/v1/news/news "HTTP/1.1 200 OK"
+2024-12-26 19:31:54,180 - passlib.handlers.bcrypt - WARNING - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\passlib\handlers\bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'
+2024-12-26 19:31:54,196 - passlib.handlers.bcrypt - DEBUG - detected 'bcrypt' backend, version '<unknown>'
+2024-12-26 19:31:54,196 - passlib.handlers.bcrypt - DEBUG - 'bcrypt' backend lacks $2$ support, enabling workaround
+2024-12-26 19:31:54,542 - asyncio - DEBUG - Using proactor: IocpProactor
+2024-12-26 19:31:54,555 - urllib3.connectionpool - DEBUG - https://o4508489109209088.ingest.us.sentry.io:443 "POST /api/4508489123627008/envelope/ HTTP/11" 200 None
+2024-12-26 19:31:54,555 - root - INFO - Successfully fetched upvote count for article ID: 2
+2024-12-26 19:31:54,555 - root - INFO - Successfully fetched upvote count for article ID: 1
+2024-12-26 19:31:54,567 - httpx - INFO - HTTP Request: GET http://testserver/api/v1/news/user_news "HTTP/1.1 200 OK"
+2024-12-26 19:31:54,579 - asyncio - DEBUG - Using proactor: IocpProactor
+2024-12-26 19:31:54,583 - filelock - DEBUG - Attempting to acquire lock 2954394342544 on C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\tldextract\.suffix_cache\publicsuffix.org-tlds\de84b5ca2167d4c83e38fb162f2e8738.tldextract.json.lock
+2024-12-26 19:31:54,587 - filelock - DEBUG - Lock 2954394342544 acquired on C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\tldextract\.suffix_cache\publicsuffix.org-tlds\de84b5ca2167d4c83e38fb162f2e8738.tldextract.json.lock
+2024-12-26 19:31:54,587 - filelock - DEBUG - Attempting to release lock 2954394342544 on C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\tldextract\.suffix_cache\publicsuffix.org-tlds\de84b5ca2167d4c83e38fb162f2e8738.tldextract.json.lock
+2024-12-26 19:31:54,587 - filelock - DEBUG - Lock 2954394342544 released on C:\Users\user\AppData\Local\Programs\Python\Python312\Lib\site-packages\tldextract\.suffix_cache\publicsuffix.org-tlds\de84b5ca2167d4c83e38fb162f2e8738.tldextract.json.lock
+2024-12-26 19:31:54,612 - root - INFO - Search news success: Test Title
+2024-12-26 19:31:54,614 - httpx - INFO - HTTP Request: POST http://testserver/api/v1/news/search_news "HTTP/1.1 200 OK"
+2024-12-26 19:31:54,622 - asyncio - DEBUG - Using proactor: IocpProactor
+2024-12-26 19:31:54,626 - httpx - INFO - HTTP Request: POST http://testserver/api/v1/news/news_summary "HTTP/1.1 200 OK"
+2024-12-26 19:31:54,634 - asyncio - DEBUG - Using proactor: IocpProactor
+2024-12-26 19:31:54,635 - root - INFO - Upvote added for article ID: 1
+2024-12-26 19:31:54,641 - urllib3.connectionpool - DEBUG - https://o4508489109209088.ingest.us.sentry.io:443 "POST /api/4508489123627008/envelope/ HTTP/11" 200 None
+2024-12-26 19:31:54,655 - httpx - INFO - HTTP Request: POST http://testserver/api/v1/news/1/upvote "HTTP/1.1 200 OK"
+2024-12-26 19:31:54,658 - asyncio - DEBUG - Using proactor: IocpProactor
+2024-12-26 19:31:54,660 - root - INFO - Upvote removed for article ID: 1
+2024-12-26 19:31:54,676 - httpx - INFO - HTTP Request: POST http://testserver/api/v1/news/1/upvote "HTTP/1.1 200 OK"
+2024-12-26 19:31:54,676 - asyncio - DEBUG - Using proactor: IocpProactor
+2024-12-26 19:31:54,687 - httpx - INFO - HTTP Request: GET http://testserver/api/v1/prices/necessities-price "HTTP/1.1 200 OK"
+2024-12-26 19:31:54,688 - asyncio - DEBUG - Using proactor: IocpProactor
+2024-12-26 19:31:54,688 - httpx - INFO - HTTP Request: GET http://testserver/api/v1/prices/necessities-price?category=%E9%AE%AE%E4%B9%B3&commodity=%E7%B5%B1%E4%B8%80%E7%91%9E%E7%A9%97%E9%AB%98%E5%84%AA%E8%B3%AA%E9%AE%AE%E4%B9%B3 "HTTP/1.1 200 OK"
+2024-12-26 19:31:54,697 - asyncio - DEBUG - Using proactor: IocpProactor
+2024-12-26 19:31:54,723 - urllib3.connectionpool - DEBUG - https://o4508489109209088.ingest.us.sentry.io:443 "POST /api/4508489123627008/envelope/ HTTP/11" 200 None
+2024-12-26 19:31:54,778 - urllib3.connectionpool - DEBUG - https://o4508489109209088.ingest.us.sentry.io:443 "POST /api/4508489123627008/envelope/ HTTP/11" 200 None
+2024-12-26 19:31:54,840 - urllib3.connectionpool - DEBUG - https://o4508489109209088.ingest.us.sentry.io:443 "POST /api/4508489123627008/envelope/ HTTP/11" 200 None
+2024-12-26 19:31:54,901 - urllib3.connectionpool - DEBUG - https://o4508489109209088.ingest.us.sentry.io:443 "POST /api/4508489123627008/envelope/ HTTP/11" 200 None
+2024-12-26 19:31:54,958 - urllib3.connectionpool - DEBUG - https://o4508489109209088.ingest.us.sentry.io:443 "POST /api/4508489123627008/envelope/ HTTP/11" 200 None
+2024-12-26 19:31:55,052 - httpx - INFO - HTTP Request: POST http://testserver/api/v1/users/register "HTTP/1.1 200 OK"
+2024-12-26 19:31:55,268 - urllib3.connectionpool - DEBUG - https://o4508489109209088.ingest.us.sentry.io:443 "POST /api/4508489123627008/envelope/ HTTP/11" 200 None
+2024-12-26 19:31:55,321 - urllib3.connectionpool - DEBUG - https://o4508489109209088.ingest.us.sentry.io:443 "POST /api/4508489123627008/envelope/ HTTP/11" 200 None
+2024-12-26 19:31:55,372 - asyncio - DEBUG - Using proactor: IocpProactor
+2024-12-26 19:31:55,377 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2024-12-26 19:31:55,377 - python_multipart.multipart - DEBUG - Calling on_field_name with data[0:8]
+2024-12-26 19:31:55,377 - python_multipart.multipart - DEBUG - Calling on_field_data with data[9:17]
+2024-12-26 19:31:55,377 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2024-12-26 19:31:55,377 - python_multipart.multipart - DEBUG - Calling on_field_start with no data
+2024-12-26 19:31:55,377 - python_multipart.multipart - DEBUG - Calling on_field_name with data[18:26]
+2024-12-26 19:31:55,377 - python_multipart.multipart - DEBUG - Calling on_field_data with data[27:39]
+2024-12-26 19:31:55,377 - python_multipart.multipart - DEBUG - Calling on_field_end with no data
+2024-12-26 19:31:55,379 - python_multipart.multipart - DEBUG - Calling on_end with no data
+2024-12-26 19:31:55,727 - root - INFO - User 'testuser' logged in successfully
+2024-12-26 19:31:55,727 - httpx - INFO - HTTP Request: POST http://testserver/api/v1/users/login "HTTP/1.1 200 OK"
+2024-12-26 19:31:55,737 - asyncio - DEBUG - Using proactor: IocpProactor
+2024-12-26 19:31:55,737 - httpx - INFO - HTTP Request: GET http://testserver/api/v1/users/me "HTTP/1.1 200 OK"
+2024-12-26 19:31:55,788 - urllib3.connectionpool - DEBUG - https://o4508489109209088.ingest.us.sentry.io:443 "POST /api/4508489123627008/envelope/ HTTP/11" 200 None
+2024-12-26 19:31:55,836 - urllib3.connectionpool - DEBUG - https://o4508489109209088.ingest.us.sentry.io:443 "POST /api/4508489123627008/envelope/ HTTP/11" 200 None
+2024-12-26 19:31:55,895 - urllib3.connectionpool - DEBUG - https://o4508489109209088.ingest.us.sentry.io:443 "POST /api/4508489123627008/envelope/ HTTP/11" 200 None
+2024-12-26 19:31:55,951 - urllib3.connectionpool - DEBUG - https://o4508489109209088.ingest.us.sentry.io:443 "POST /api/4508489123627008/envelope/ HTTP/11" 200 None

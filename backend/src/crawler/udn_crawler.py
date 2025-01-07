@@ -35,6 +35,7 @@ UDNCrawler Methods:
 from requests import Response, get
 from bs4 import BeautifulSoup
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import SQLAlchemyError
 from urllib.parse import quote
 
 from .crawler_base import NewsCrawlerBase, Headline, News, NewsWithSummary
@@ -127,15 +128,20 @@ class UDNCrawler(NewsCrawlerBase):
         )
 
     def save(self, news: NewsWithSummary, db: Session):
-        db.add(NewsArticle(
-            url = news.url,
-            title = news.title,
-            time = news.time,
-            content = " ".join(news.content),
-            summary = news.summary,
-            reason = news.reason
-        ))
-        self._commit_changes(db)
+        try:
+            db.add(NewsArticle(
+                url = news.url,
+                title = news.title,
+                time = news.time,
+                content = " ".join(news.content),
+                summary = news.summary,
+                reason = news.reason
+            ))
+        except SQLAlchemyError:
+            db.rollback()
+            raise
+        else:
+            self._commit_changes(db)
 
     @staticmethod
     def _commit_changes(db: Session):
