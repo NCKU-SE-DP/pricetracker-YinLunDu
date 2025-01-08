@@ -28,5 +28,5 @@ class User(Base):
     @staticmethod
     def validate_password(password: str):
         if len(password) > Config.Auth.MAX_PASSWORD_SIZE:
-            logger.error(f"User login failed: {InvalidUsernameSizeException(len(password))}")
+            logger.error(f"User login failed: {InvalidPasswordSizeException(len(password))}")
             raise InvalidPasswordSizeException(len(password))
