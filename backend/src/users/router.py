@@ -42,12 +42,8 @@ async def login_for_access_token(
     :return: JSON 格式的訪問令牌資訊，包括 `access_token` 和 `token_type`。
     """
     try:
-        if len(user_data.username) > Config.Auth.MAX_USERNAME_SIZE:
-            logger.error(f"User login failed: {InvalidUsernameSizeException(len(user_data.username))}")
-            raise InvalidUsernameSizeException(len(user_data.username))
-        if len(user_data.password) > Config.Auth.MAX_PASSWORD_SIZE:
-            logger.error(f"User login failed: {InvalidPasswordSizeException(len(user_data.username))}")
-            raise InvalidPasswordSizeException(len(user_data.password))
+        User.validate_username(user_data.username)
+        User.validate_password(user_data.password)
         
         # 驗證使用者的帳號和密碼
         user = check_user_password_is_correct(db_session, user_data.username, user_data.password)
@@ -76,12 +72,8 @@ def create_user(user_data: UserAuthSchema , db_session: Session = Depends(sessio
     :return: 新增的 `User` 對象，包含使用者的基本資訊。
     """
     try:
-        if len(user_data.username) > Config.Auth.MAX_USERNAME_SIZE:
-            logger.error(f"User login failed: {InvalidUsernameSizeException(len(user_data.username))}")
-            raise InvalidUsernameSizeException(len(user_data.username))
-        if len(user_data.password) > Config.Auth.MAX_PASSWORD_SIZE:
-            logger.error(f"User login failed: {InvalidPasswordSizeException(len(user_data.username))}")
-            raise InvalidPasswordSizeException(len(user_data.password))
+        User.validate_username(user_data.username)
+        User.validate_password(user_data.password)
         
         hashed_password = pwd_context.hash(user_data.password)
         new_user = User(username=user_data.username, hashed_password=hashed_password)

@@ -2,6 +2,11 @@ from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 from ..database import Base, user_news_association_table
 from ..config import Config
+from ..logger import logger
+from ..exceptions_handler import (
+    InvalidUsernameSizeException,
+    InvalidPasswordSizeException
+)
 
 class User(Base):
     __tablename__ = "users"
@@ -17,9 +22,11 @@ class User(Base):
     @staticmethod
     def validate_username(username: str):
         if len(username) > Config.Auth.MAX_USERNAME_SIZE:
-            raise ValueError("Username is too long")
+            logger.error(f"User login failed: {InvalidUsernameSizeException(len(username))}")
+            raise InvalidUsernameSizeException(len(username))
     
     @staticmethod
     def validate_password(password: str):
         if len(password) > Config.Auth.MAX_PASSWORD_SIZE:
-            raise ValueError("Password is too long")
+            logger.error(f"User login failed: {InvalidUsernameSizeException(len(password))}")
+            raise InvalidPasswordSizeException(len(password))
